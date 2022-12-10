@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/adminDashboard.css" />
+
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+      <a href="" class="brand">
+        <i class="bx bxs-store-alt"></i>
+        <span class="text">The Super Store</span>
+      </a>
+      <ul class="side-menu top">
+        <li class="active">
+          <a href="/adminDashboard">
+            <i class="bx bxs-dashboard"></i>
+            <span class="text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/adminStoresDetails">
+            <i class="bx bxs-store"></i>
+            <span class="text">Stores Details</span>
+          </a>
+        </li>
+        <li>
+          <a href="/adminSalesAnalytics">
+            <i class="bx bxs-doughnut-chart"></i>
+            <span class="text">Sales Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="/adminStocks">
+            <i class="bx bxs-shopping-bag-alt"></i>
+            <span class="text">Stock</span>
+          </a>
+        </li>
+        <li>
+          <a href="/adminDistributors">
+            <i class="bx bxs-group"></i>
+            <span class="text">Distributors</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a href="">
+            <i class="bx bxs-cog"></i>
+            <span class="text">Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="/login" class="logout">
+            <i class="bx bxs-log-out-circle"></i>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <div id="content">
+      <!-- NAVBAR -->
+      <nav>
+        <i class="bx bx-menu"></i>
+        <form action="#">
+          <div class="form-input">
+            <input type="search" placeholder="Search..." />
+            <button type="submit" class="search-btn"><i class="bx bx-search"></i></button>
+          </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden />
+        <label for="switch-mode" class="switch-mode"></label>
+        <div class="notification">
+          <i class="bx bxs-bell"></i>
+          <!--<span class="num">1</span>-->
+        </div>
+        <div class="notification">
+          <i class="bx bxs-message"></i>
+          <!--<span class="num">1</span>-->
+        </div>
+      </nav>
+      <!-- NAVBAR -->
+
+      <!-- MAIN -->
+      <section id="dashboard">
+        <div class="head-title">
+          <div class="left">
+            <h1>Admin Dashboard</h1>
+          </div>
+        </div>
+
+        <ul class="box-info">
+          <li>
+            <i class="bx bx-male"></i>
+            <span class="text">
+              <h3><%=data[0][0]['count']%></h3>
+              <p>Distributors</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bxs-shopping-bag"></i>
+            <span class="text">
+              <h3><%=data[1][0]['count']%></h3>
+              <p>Stores</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="text">
+              <h3>$<%=data[2][0]['total']%></h3>
+              <p>Profits</p>
+            </span>
+          </li>
+        </ul>
+
+        <div class="table-data">
+          <div class="todo">
+            <div class="head">
+              <h3>Todos</h3>
+              <i class="bx bx-plus" type="submit"></i>
+              <i class="bx bx-filter"></i>
+            </div>
+
+            <ul class="todo-list">
+              <% if(data[3].length>0){ data[3].forEach(function(Task) {%>
+              <li class="completed">
+                <p><%=Task.task%></p>
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </li>
+              <%}) } else { %>
+              <li class="completed">
+                <p>No Tasks To Do</p>
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </li>
+              <%}%>
+            </ul>
+          </br>
+            <div class="head">
+              <h3>Add Task</h3>
+            </div>
+
+            <form action="/AdminDashboard" method="post">
+              <div class="input-field">
+                <i class="bx bx-shopping-bag"></i>
+                <input type="text" id="dpName" name="dpName" placeholder="Enter Task" required />
+              </div>
+              <div style="margin-left: 10px">
+                <button class="btn solid" type="submit">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- MAIN -->
+    </div>
+    <!-- CONTENT -->
+
+    <script src="js/adminDashboard.js"></script>
+  </body>
+</html>
